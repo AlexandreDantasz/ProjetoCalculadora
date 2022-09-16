@@ -5,6 +5,7 @@ namespace abd{
     class Calculadora
     {
         public:
+            //Métodos
             Calculadora();
             Calculadora(double primeiroValor, double segundoValor);
             double calcularAdicao()const;
@@ -18,6 +19,7 @@ namespace abd{
             void setSegundoValor(double newSegundoValor);
             double getSegundoValor()const;
         private:
+            //Atributos
             double primeiroValor;
             double segundoValor;
     };
