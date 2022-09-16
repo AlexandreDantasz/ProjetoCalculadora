@@ -149,3 +149,15 @@ void MainWindow::on_pushButtonAC_clicked()
     ui->lineEditOperacoes->setText(saida);
 }
 
+
+void MainWindow::on_pushButtonApagar_clicked()
+{
+    QString copia = saida;
+    int tam = saida.size();
+    saida.clear();
+    for(int i = 0; i < tam - 1; i++){
+        saida += copia[i];
+    }
+    ui->lineEditOperacoes->setText(saida);
+}
+
