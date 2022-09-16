@@ -1,13 +1,15 @@
 #ifndef CALCULADORA_H
 #define CALCULADORA_H
+#include <cmath>
 
 namespace abd{
     class Calculadora
     {
         public:
-            //Métodos
+            //Construtores
             Calculadora();
             Calculadora(double primeiroValor, double segundoValor);
+            //Métodos
             double calcularAdicao()const;
             double calcularSubtracao()const;
             double calcularMultiplicacao()const;
