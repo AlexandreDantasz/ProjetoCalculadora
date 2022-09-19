@@ -96,6 +96,7 @@ void MainWindow::on_pushButtonNove_clicked()
 
 void MainWindow::on_pushButtonMultiplicacao_clicked()
 {
+
     saida += '*';
     ui->lineEditOperacoes->setText(saida);
 }
@@ -162,18 +163,6 @@ void MainWindow::on_pushButtonApagar_clicked()
 }
 
 
-void MainWindow::on_pushButtonFechaParentese_clicked()
-{
-    saida += ')';
-    ui->lineEditOperacoes->setText(saida);
-}
-
-
-void MainWindow::on_pushButtonAbreParentese_clicked()
-{
-    saida += '(';
-    ui->lineEditOperacoes->setText(saida);
-}
 
 
 void MainWindow::on_pushButtonExecutar_clicked()
