@@ -175,3 +175,52 @@ void MainWindow::on_pushButtonAbreParentese_clicked()
     ui->lineEditOperacoes->setText(saida);
 }
 
+
+void MainWindow::on_pushButtonExecutar_clicked()
+{
+    abd::Calculadora resultado;
+    QString rad = "√";
+    int i, k;
+    for(i = 0; i < saida.size() && saida[i] != '+' && saida[i] != '-' && saida[i] != '*' && saida[i] != '/' && saida[i] != rad && saida[i] != '^'; i++);
+    QString primeiroValor, segundoValor;
+    for(k = 0; k < i; k++){
+        primeiroValor += saida[k];
+    }
+    for(k = i + 1; k < saida.size(); k++){
+        segundoValor += saida[k];
+    }
+    resultado.setPrimeiroValor(primeiroValor.toDouble());
+    resultado.setSegundoValor(segundoValor.toDouble());
+    if(saida[i] == '+'){
+        saida = QString::number(resultado.calcularAdicao());
+    }
+    else{
+        if(saida[i] == '-'){
+            saida = QString::number(resultado.calcularSubtracao());
+        }
+        else
+        {
+            if(saida[i] == '*'){
+                saida = QString::number(resultado.calcularMultiplicacao());
+            }
+            else
+            {
+                if(saida[i] == '/'){
+                    saida = QString::number(resultado.calcularDivisao());
+                }
+                else
+                {
+                    if(saida[i] == '^'){
+                        saida = QString::number(resultado.calcularPotenciacao(primeiroValor.toDouble(), segundoValor.toDouble()));
+                    }
+                    else
+                    {
+                        saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                    }
+                }
+            }
+        }
+    }
+    ui->lineEditResultado->setText(saida);
+}
+
