@@ -161,3 +161,17 @@ void MainWindow::on_pushButtonApagar_clicked()
     ui->lineEditOperacoes->setText(saida);
 }
 
+
+void MainWindow::on_pushButtonFechaParentese_clicked()
+{
+    saida += ')';
+    ui->lineEditOperacoes->setText(saida);
+}
+
+
+void MainWindow::on_pushButtonAbreParentese_clicked()
+{
+    saida += '(';
+    ui->lineEditOperacoes->setText(saida);
+}
+
