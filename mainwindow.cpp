@@ -189,6 +189,7 @@ void MainWindow::on_pushButtonDivisao_clicked()
 void MainWindow::on_pushButtonAC_clicked()
 {
     saida.clear();
+    contador=0;
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -202,7 +203,11 @@ void MainWindow::on_pushButtonApagar_clicked()
     for(int i = 0; i < tam - 1; i++){
         saida += copia[i];
     }
-
+    int i = tam - 1;
+    if(copia[i] == '+' || copia[i] == '-' || copia[i] == '*' || copia[i] == '/' || copia[i] == '^' || copia[i] == rad)
+    {
+        contador--;
+    }
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -221,7 +226,6 @@ void MainWindow::on_pushButtonExecutar_clicked()
     for(k = i + 1; k < saida.size(); k++){
         segundoValor += saida[k];
     }
-
     resultado.setPrimeiroValor(primeiroValor.toDouble());
     resultado.setSegundoValor(segundoValor.toDouble());
     if(saida[i] == '+'){
