@@ -214,6 +214,11 @@ void MainWindow::on_pushButtonApagar_clicked()
 
 void MainWindow::on_pushButtonExecutar_clicked()
 {
+    if(saida.isEmpty()){
+        ui->lineEditResultado->setText(saida);
+    }
+    else
+    {
     abd::Calculadora resultado;
     contador=0;
     QString rad = "√";
@@ -228,35 +233,43 @@ void MainWindow::on_pushButtonExecutar_clicked()
     }
     resultado.setPrimeiroValor(primeiroValor.toDouble());
     resultado.setSegundoValor(segundoValor.toDouble());
-    if(saida[i] == '+'){
-        saida = QString::number(resultado.calcularAdicao());
+    if(i == saida.size())
+    {
+        ui->lineEditResultado->setText(saida);
     }
-    else{
-        if(saida[i] == '-'){
-            saida = QString::number(resultado.calcularSubtracao());
+    else
+    {
+        if(saida[i] == '+'){
+            saida = QString::number(resultado.calcularAdicao());
         }
-        else
-        {
-            if(saida[i] == '*'){
-                saida = QString::number(resultado.calcularMultiplicacao());
+        else{
+            if(saida[i] == '-'){
+                saida = QString::number(resultado.calcularSubtracao());
             }
             else
             {
-                if(saida[i] == '/'){
-                    saida = QString::number(resultado.calcularDivisao());
+                if(saida[i] == '*'){
+                    saida = QString::number(resultado.calcularMultiplicacao());
                 }
                 else
                 {
-                    if(saida[i] == '^'){
-                        saida = QString::number(resultado.calcularPotenciacao(primeiroValor.toDouble(), segundoValor.toDouble()));
+                    if(saida[i] == '/'){
+                        saida = QString::number(resultado.calcularDivisao());
                     }
                     else
                     {
-                        saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                        if(saida[i] == '^'){
+                            saida = QString::number(resultado.calcularPotenciacao(primeiroValor.toDouble(), segundoValor.toDouble()));
+                        }
+                        else
+                        {
+                            saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                        }
                     }
                 }
             }
         }
+        ui->lineEditResultado->setText(saida);
     }
-    ui->lineEditResultado->setText(saida);
+    }
 }
