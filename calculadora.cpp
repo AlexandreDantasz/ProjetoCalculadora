@@ -29,6 +29,9 @@ namespace abd{
     double Calculadora::calcularAdicao()const{
         return primeiroValor + segundoValor;
     }
+    double Calculadora::calcularSubtracao()const{
+        return primeiroValor - segundoValor;
+    }
     double Calculadora::calcularDivisao()const{
         return primeiroValor / segundoValor;
     }
