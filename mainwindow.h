@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <calculadora.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -55,6 +56,8 @@ private slots:
     void on_pushButtonAC_clicked();
 
     void on_pushButtonApagar_clicked();
+
+    void on_pushButtonExecutar_clicked();
 
 private:
     Ui::MainWindow *ui;
