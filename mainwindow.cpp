@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <cmath>
 #include <QMessageBox>
 
+abd::Calculadora resultado;
 QString saida;
 int contador=0;
 
@@ -21,13 +21,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButtonInformacoes_clicked()
 {
-    QMessageBox::about(this,"Versão 1.0\n", "Devs\n" "Alexandre Dantas\n" "Bruno Enzo \n" "Diego Silva\n");
+    QMessageBox::about(this,"Versão 1.0\n", "Devs:\n" "Alexandre Dantas\n" "Bruno Enzo \n" "Diego Silva\n");
 }
 
 
 void MainWindow::on_pushButtonZero_clicked()
 {
     saida += '0';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -35,6 +36,7 @@ void MainWindow::on_pushButtonZero_clicked()
 void MainWindow::on_pushButtonUm_clicked()
 {
     saida += '1';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -42,6 +44,7 @@ void MainWindow::on_pushButtonUm_clicked()
 void MainWindow::on_pushButtonDois_clicked()
 {
     saida += '2';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -49,6 +52,7 @@ void MainWindow::on_pushButtonDois_clicked()
 void MainWindow::on_pushButtonTres_clicked()
 {
     saida += '3';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -56,6 +60,7 @@ void MainWindow::on_pushButtonTres_clicked()
 void MainWindow::on_pushButtonSeis_clicked()
 {
     saida += '6';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -63,6 +68,7 @@ void MainWindow::on_pushButtonSeis_clicked()
 void MainWindow::on_pushButtonQuatro_clicked()
 {
     saida += '4';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -70,6 +76,7 @@ void MainWindow::on_pushButtonQuatro_clicked()
 void MainWindow::on_pushButtonCinco_clicked()
 {
     saida += '5';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -77,6 +84,7 @@ void MainWindow::on_pushButtonCinco_clicked()
 void MainWindow::on_pushButtonSete_clicked()
 {
     saida += '7';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -84,6 +92,7 @@ void MainWindow::on_pushButtonSete_clicked()
 void MainWindow::on_pushButtonOito_clicked()
 {
     saida += '8';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -91,6 +100,7 @@ void MainWindow::on_pushButtonOito_clicked()
 void MainWindow::on_pushButtonNove_clicked()
 {
     saida += '9';
+    resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
 
@@ -100,6 +110,7 @@ void MainWindow::on_pushButtonMultiplicacao_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '*';
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -113,6 +124,7 @@ void MainWindow::on_pushButtonSubtracao_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '-';
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -126,6 +138,7 @@ void MainWindow::on_pushButtonAdicao_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '+';
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -139,6 +152,7 @@ void MainWindow::on_pushButtonParteDecimal_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '.';
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -152,6 +166,7 @@ void MainWindow::on_pushButtonPotencializacao_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '^';
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -165,6 +180,7 @@ void MainWindow::on_pushButtonRadiciacao_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += "√";
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -178,6 +194,7 @@ void MainWindow::on_pushButtonDivisao_clicked()
     try {
     if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '/';
+    resultado.setValores(saida);
     contador++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
@@ -189,6 +206,7 @@ void MainWindow::on_pushButtonDivisao_clicked()
 void MainWindow::on_pushButtonAC_clicked()
 {
     saida.clear();
+    resultado.setValores(saida);
     contador=0;
     ui->lineEditOperacoes->setText(saida);
 }
@@ -209,6 +227,7 @@ void MainWindow::on_pushButtonApagar_clicked()
         {
             contador--;
         }
+        resultado.setValores(saida);
         ui->lineEditOperacoes->setText(saida);
     }
 }
@@ -216,13 +235,12 @@ void MainWindow::on_pushButtonApagar_clicked()
 
 void MainWindow::on_pushButtonExecutar_clicked()
 {
-    try {
+    try{
         if(saida.isEmpty()){
             ui->lineEditResultado->setText(saida);
         }
         else
         {
-            abd::Calculadora resultado;
             contador=0;
             QString rad = "√";
             int i, k;
@@ -275,7 +293,8 @@ void MainWindow::on_pushButtonExecutar_clicked()
                 ui->lineEditResultado->setText(saida);
             }
         }
-    } catch (QString &erro) {
-        QMessageBox::information(this,"ERRO DO SISTEMA",erro);
+    }
+    catch (QString &erro){
+        QMessageBox::information(this, "ERRO", erro);
     }
 }
