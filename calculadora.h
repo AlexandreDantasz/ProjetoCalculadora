@@ -1,6 +1,7 @@
 #ifndef CALCULADORA_H
 #define CALCULADORA_H
 #include <cmath>
+#include <QString>
 
 namespace abd{
     class Calculadora
@@ -18,10 +19,12 @@ namespace abd{
             double calcularPotenciacao(double valorDaBase, double expoente)const;
             void setPrimeiroValor(double newPrimeiroValor);
             double getPrimeiroValor()const;
+            void setValores(QString newValores);
             void setSegundoValor(double newSegundoValor);
             double getSegundoValor()const;
         private:
             //Atributos
+            QString valores;
             double primeiroValor;
             double segundoValor;
     };
