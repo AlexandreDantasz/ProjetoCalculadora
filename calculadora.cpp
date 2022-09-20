@@ -33,6 +33,7 @@ namespace abd{
         return primeiroValor - segundoValor;
     }
     double Calculadora::calcularDivisao()const{
+        if(segundoValor == 0) throw QString("O denominador não pode ser igual a 0");
         return primeiroValor / segundoValor;
     }
     double Calculadora::calcularMultiplicacao()const{
