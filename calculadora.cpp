@@ -1,6 +1,7 @@
 #include "calculadora.h"
 
 
+
 namespace abd{
     Calculadora::Calculadora():
     primeiroValor(0.0),
@@ -14,11 +15,11 @@ namespace abd{
         this->primeiroValor = primeiroValor;
         this->segundoValor = segundoValor;
     }
+    void Calculadora::setValores(QString newValores){
+            valores = newValores;
+        }
     double Calculadora::getPrimeiroValor()const{
         return primeiroValor;
-    }
-    void Calculadora::setValores(QString newValores){
-        valores = newValores;
     }
     void Calculadora::setPrimeiroValor(double newPrimeiroValor){
         primeiroValor = newPrimeiroValor;
@@ -30,12 +31,15 @@ namespace abd{
         segundoValor = newsegundoValor;
     }
     double Calculadora::calcularAdicao()const{
+        if(valores.size() == 1) throw QString ("Digite algum valor");
         return primeiroValor + segundoValor;
     }
     double Calculadora::calcularSubtracao()const{
+        if(valores.size() == 1) throw QString ("Digite algum valor");
         return primeiroValor - segundoValor;
     }
     double Calculadora::calcularDivisao()const{
+        if(segundoValor == 0 ) throw QString ("O denominador não pode ser zero(0).");
         return primeiroValor / segundoValor;
     }
     double Calculadora::calcularMultiplicacao()const{
