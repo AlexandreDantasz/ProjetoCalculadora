@@ -196,80 +196,86 @@ void MainWindow::on_pushButtonAC_clicked()
 
 void MainWindow::on_pushButtonApagar_clicked()
 {
-    QString rad = "√";
-    QString copia = saida;
-    int tam = saida.size();
-    saida.clear();
-    for(int i = 0; i < tam - 1; i++){
-        saida += copia[i];
+    if(!saida.isEmpty()){
+        QString rad = "√";
+        QString copia = saida;
+        int tam = saida.size();
+        saida.clear();
+        for(int i = 0; i < tam - 1; i++){
+            saida += copia[i];
+        }
+        int i = tam - 1;
+        if(copia[i] == '+' || copia[i] == '-' || copia[i] == '*' || copia[i] == '/' || copia[i] == '^' || copia[i] == rad)
+        {
+            contador--;
+        }
+        ui->lineEditOperacoes->setText(saida);
     }
-    int i = tam - 1;
-    if(copia[i] == '+' || copia[i] == '-' || copia[i] == '*' || copia[i] == '/' || copia[i] == '^' || copia[i] == rad)
-    {
-        contador--;
-    }
-    ui->lineEditOperacoes->setText(saida);
 }
 
 
 void MainWindow::on_pushButtonExecutar_clicked()
 {
-    if(saida.isEmpty()){
-        ui->lineEditResultado->setText(saida);
-    }
-    else
-    {
-    abd::Calculadora resultado;
-    contador=0;
-    QString rad = "√";
-    int i, k;
-    for(i = 0; i < saida.size() && saida[i] != '+' && saida[i] != '-' && saida[i] != '*' && saida[i] != '/' && saida[i] != rad && saida[i] != '^'; i++);
-    QString primeiroValor, segundoValor;
-    for(k = 0; k < i; k++){
-        primeiroValor += saida[k];
-    }
-    for(k = i + 1; k < saida.size(); k++){
-        segundoValor += saida[k];
-    }
-    resultado.setPrimeiroValor(primeiroValor.toDouble());
-    resultado.setSegundoValor(segundoValor.toDouble());
-    if(i == saida.size())
-    {
-        ui->lineEditResultado->setText(saida);
-    }
-    else
-    {
-        if(saida[i] == '+'){
-            saida = QString::number(resultado.calcularAdicao());
+    try {
+        if(saida.isEmpty()){
+            ui->lineEditResultado->setText(saida);
         }
-        else{
-            if(saida[i] == '-'){
-                saida = QString::number(resultado.calcularSubtracao());
+        else
+        {
+            abd::Calculadora resultado;
+            contador=0;
+            QString rad = "√";
+            int i, k;
+            for(i = 0; i < saida.size() && saida[i] != '+' && saida[i] != '-' && saida[i] != '*' && saida[i] != '/' && saida[i] != rad && saida[i] != '^'; i++);
+            QString primeiroValor, segundoValor;
+            for(k = 0; k < i; k++){
+                primeiroValor += saida[k];
+            }
+            for(k = i + 1; k < saida.size(); k++){
+                segundoValor += saida[k];
+            }
+            resultado.setPrimeiroValor(primeiroValor.toDouble());
+            resultado.setSegundoValor(segundoValor.toDouble());
+            if(i == saida.size())
+            {
+                ui->lineEditResultado->setText(saida);
             }
             else
             {
-                if(saida[i] == '*'){
-                    saida = QString::number(resultado.calcularMultiplicacao());
+                if(saida[i] == '+'){
+                    saida = QString::number(resultado.calcularAdicao());
                 }
-                else
-                {
-                    if(saida[i] == '/'){
-                        saida = QString::number(resultado.calcularDivisao());
+                else{
+                    if(saida[i] == '-'){
+                        saida = QString::number(resultado.calcularSubtracao());
                     }
                     else
                     {
-                        if(saida[i] == '^'){
-                            saida = QString::number(resultado.calcularPotenciacao(primeiroValor.toDouble(), segundoValor.toDouble()));
+                        if(saida[i] == '*'){
+                            saida = QString::number(resultado.calcularMultiplicacao());
                         }
                         else
                         {
-                            saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                            if(saida[i] == '/'){
+                                saida = QString::number(resultado.calcularDivisao());
+                            }
+                            else
+                            {
+                                if(saida[i] == '^'){
+                                    saida = QString::number(resultado.calcularPotenciacao(primeiroValor.toDouble(), segundoValor.toDouble()));
+                                }
+                                else
+                                {
+                                    saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                                }
+                            }
                         }
                     }
                 }
+                ui->lineEditResultado->setText(saida);
             }
         }
-        ui->lineEditResultado->setText(saida);
-    }
+    } catch (QString &erro) {
+        QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
 }
