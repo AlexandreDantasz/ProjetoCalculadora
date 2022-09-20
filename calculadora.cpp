@@ -17,6 +17,9 @@ namespace abd{
     double Calculadora::getPrimeiroValor()const{
         return primeiroValor;
     }
+    void Calculadora::setValores(QString newValores){
+        valores = newValores;
+    }
     void Calculadora::setPrimeiroValor(double newPrimeiroValor){
         primeiroValor = newPrimeiroValor;
     }
@@ -33,10 +36,10 @@ namespace abd{
         return primeiroValor - segundoValor;
     }
     double Calculadora::calcularDivisao()const{
-        if(segundoValor == 0) throw QString("O denominador não pode ser igual a 0");
         return primeiroValor / segundoValor;
     }
     double Calculadora::calcularMultiplicacao()const{
+        if(valores.size() == 1) throw QString ("Digite algum valor");
         return primeiroValor * segundoValor;
     }
     double Calculadora::calcularPotenciacao(double valorDaBase, double expoente)const{
