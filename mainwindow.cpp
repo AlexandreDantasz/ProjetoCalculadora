@@ -4,7 +4,7 @@
 
 abd::Calculadora resultado;
 QString saida;
-int contador=0;
+int contador=0,contadorDePontos=0;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -108,11 +108,12 @@ void MainWindow::on_pushButtonNove_clicked()
 void MainWindow::on_pushButtonMultiplicacao_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-    saida += '*';
-    resultado.setValores(saida);
-    contador++;
-    ui->lineEditOperacoes->setText(saida);
+        contadorDePontos=0;
+        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        saida += '*';
+        resultado.setValores(saida);
+        contador++;
+        ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
@@ -122,11 +123,12 @@ void MainWindow::on_pushButtonMultiplicacao_clicked()
 void MainWindow::on_pushButtonSubtracao_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-    saida += '-';
-    resultado.setValores(saida);
-    contador++;
-    ui->lineEditOperacoes->setText(saida);
+        contadorDePontos=0;
+        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        saida += '-';
+        resultado.setValores(saida);
+        contador++;
+        ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
@@ -136,11 +138,12 @@ void MainWindow::on_pushButtonSubtracao_clicked()
 void MainWindow::on_pushButtonAdicao_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-    saida += '+';
-    resultado.setValores(saida);
-    contador++;
-    ui->lineEditOperacoes->setText(saida);
+        contadorDePontos=0;
+        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        saida += '+';
+        resultado.setValores(saida);
+        contador++;
+        ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
@@ -150,10 +153,10 @@ void MainWindow::on_pushButtonAdicao_clicked()
 void MainWindow::on_pushButtonParteDecimal_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+    if(contadorDePontos > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
     saida += '.';
     resultado.setValores(saida);
-    contador++;
+    contadorDePontos++;
     ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
@@ -164,11 +167,12 @@ void MainWindow::on_pushButtonParteDecimal_clicked()
 void MainWindow::on_pushButtonPotencializacao_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-    saida += '^';
-    resultado.setValores(saida);
-    contador++;
-    ui->lineEditOperacoes->setText(saida);
+        contadorDePontos=0;
+        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        saida += '^';
+        resultado.setValores(saida);
+        contador++;
+        ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
@@ -178,11 +182,12 @@ void MainWindow::on_pushButtonPotencializacao_clicked()
 void MainWindow::on_pushButtonRadiciacao_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-    saida += "√";
-    resultado.setValores(saida);
-    contador++;
-    ui->lineEditOperacoes->setText(saida);
+        contadorDePontos=0;
+        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        saida += "√";
+        resultado.setValores(saida);
+        contador++;
+        ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
@@ -192,11 +197,12 @@ void MainWindow::on_pushButtonRadiciacao_clicked()
 void MainWindow::on_pushButtonDivisao_clicked()
 {
     try {
-    if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-    saida += '/';
-    resultado.setValores(saida);
-    contador++;
-    ui->lineEditOperacoes->setText(saida);
+        contadorDePontos=0;
+        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        saida += '/';
+        resultado.setValores(saida);
+        contador++;
+        ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
     }
@@ -227,6 +233,13 @@ void MainWindow::on_pushButtonApagar_clicked()
         {
             contador--;
         }
+        else
+        {
+            if(copia[i] == '.')
+            {
+                contadorDePontos--;
+            }
+        }
         resultado.setValores(saida);
         ui->lineEditOperacoes->setText(saida);
     }
@@ -236,6 +249,7 @@ void MainWindow::on_pushButtonApagar_clicked()
 void MainWindow::on_pushButtonExecutar_clicked()
 {
     try{
+        contadorDePontos=0;
         if(saida.isEmpty()){
             ui->lineEditResultado->setText(saida);
         }
