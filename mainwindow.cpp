@@ -329,7 +329,14 @@ void MainWindow::on_pushButtonExecutar_clicked()
                                     }
                                     else
                                     {
-                                        saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                                        if(i == 0)
+                                        {
+                                            saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                                        }
+                                        else
+                                        {
+                                            saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble(), primeiroValor.toDouble()));
+                                        }
                                     }
                                 }
                             }
