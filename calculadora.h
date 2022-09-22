@@ -16,6 +16,7 @@ namespace abd{
             double calcularMultiplicacao()const;
             double calcularDivisao()const;
             double calcularRadiciacao(double valorNaRaiz)const;
+            double calcularRadiciacao(double valorNaRaiz, double indice)const;
             double calcularPotenciacao(double valorDaBase, double expoente)const;
             void setPrimeiroValor(double newPrimeiroValor);
             double getPrimeiroValor()const;
