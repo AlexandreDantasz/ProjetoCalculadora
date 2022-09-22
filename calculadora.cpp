@@ -47,10 +47,16 @@ namespace abd{
         return primeiroValor * segundoValor;
     }
     double Calculadora::calcularPotenciacao(double valorDaBase, double expoente)const{
+        if(valores.size() == 1) throw QString("Digite algum valor.");
         return pow(valorDaBase,expoente);
     }
     double Calculadora::calcularRadiciacao(double valorNaRaiz)const{
+        if(valorNaRaiz < 0) throw QString("o número não pode ser negativo");
         return sqrt(valorNaRaiz);
+    }
+    double Calculadora::calcularRadiciacao(double valorNaRaiz, double indice)const{
+        if(valorNaRaiz < 0) throw QString("o número não pode ser negativo");
+        return pow(valorNaRaiz, 1/indice);
     }
 }
 
