@@ -5,6 +5,7 @@
 abd::Calculadora resultado;
 QString saida;
 int contador=0,contadorDePontos=0;
+bool verificador;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -124,10 +125,12 @@ void MainWindow::on_pushButtonSubtracao_clicked()
 {
     try {
         contadorDePontos=0;
-        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        if(contador > 0 && saida[saida.size() - 1] != '/') throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
         saida += '-';
         resultado.setValores(saida);
-        contador++;
+        if(saida.size() > 1){
+            contador++;
+        }
         ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
@@ -153,7 +156,7 @@ void MainWindow::on_pushButtonAdicao_clicked()
 void MainWindow::on_pushButtonParteDecimal_clicked()
 {
     try {
-    if(contadorDePontos > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+    if(contadorDePontos > 0) throw QString ("HÁ MAIS DE UM PONTO FLUTUANTE EM UM DOS VALORES.");
     saida += '.';
     resultado.setValores(saida);
     contadorDePontos++;
@@ -186,7 +189,6 @@ void MainWindow::on_pushButtonRadiciacao_clicked()
         if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
         saida += "√";
         resultado.setValores(saida);
-        contador++;
         ui->lineEditOperacoes->setText(saida);
     } catch (QString &erro) {
         QMessageBox::information(this,"ERRO DO SISTEMA",erro);
@@ -198,7 +200,7 @@ void MainWindow::on_pushButtonDivisao_clicked()
 {
     try {
         contadorDePontos=0;
-        if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
+        if(contador > 0 && saida[0] != '-') throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
         saida += '/';
         resultado.setValores(saida);
         contador++;
@@ -221,6 +223,8 @@ void MainWindow::on_pushButtonAC_clicked()
 void MainWindow::on_pushButtonApagar_clicked()
 {
     if(!saida.isEmpty()){
+        contador=0;
+        contadorDePontos=0;
         QString rad = "√";
         QString copia = saida;
         int tam = saida.size();
@@ -249,6 +253,7 @@ void MainWindow::on_pushButtonApagar_clicked()
 void MainWindow::on_pushButtonExecutar_clicked()
 {
     try{
+        contador = 0;
         contadorDePontos=0;
         if(saida.isEmpty()){
             ui->lineEditResultado->setText(saida);
@@ -258,7 +263,7 @@ void MainWindow::on_pushButtonExecutar_clicked()
             contador=0;
             QString rad = "√";
             int i, k;
-            for(i = 0; i < saida.size() && saida[i] != '+' && saida[i] != '-' && saida[i] != '*' && saida[i] != '/' && saida[i] != rad && saida[i] != '^'; i++);
+            for(i = 0; i < saida.size() && saida[i] != '+' && (saida[i] != '-' || i == 0) && saida[i] != '*' && saida[i] != '/' && saida[i] != rad && saida[i] != '^'; i++);
             QString primeiroValor, segundoValor;
             for(k = 0; k < i; k++){
                 primeiroValor += saida[k];
@@ -298,7 +303,16 @@ void MainWindow::on_pushButtonExecutar_clicked()
                                 }
                                 else
                                 {
-                                    saida = QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                                    if(saida[0] == '-')
+                                    {
+                                        saida.clear();
+                                        saida +='-';
+                                        saida += QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                                    }
+                                    else
+                                    {
+                                        saida += QString::number(resultado.calcularRadiciacao(segundoValor.toDouble()));
+                                    }
                                 }
                             }
                         }
