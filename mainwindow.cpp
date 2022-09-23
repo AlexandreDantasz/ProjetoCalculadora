@@ -4,7 +4,8 @@
 
 abd::Calculadora resultado;
 QString saida;
-int contador=0,contadorDePontos=0;
+int contador=0; // contador de operadores para verificação de quantidadade dos mesmos
+int contadorDePontos=0; // contador de pontos flutuantes para verificação de quantidade dos mesmos
 bool verificador = false;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -36,7 +37,7 @@ void MainWindow::on_pushButtonZero_clicked()
 
 void MainWindow::on_pushButtonUm_clicked()
 {
-    saida += '1';
+    saida += '1'; // Adiciona valor 1 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -44,7 +45,7 @@ void MainWindow::on_pushButtonUm_clicked()
 
 void MainWindow::on_pushButtonDois_clicked()
 {
-    saida += '2';
+    saida += '2'; // Adiciona valor 2 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -52,7 +53,7 @@ void MainWindow::on_pushButtonDois_clicked()
 
 void MainWindow::on_pushButtonTres_clicked()
 {
-    saida += '3';
+    saida += '3'; // Adiciona valor 3 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -60,7 +61,7 @@ void MainWindow::on_pushButtonTres_clicked()
 
 void MainWindow::on_pushButtonSeis_clicked()
 {
-    saida += '6';
+    saida += '6'; // Adiciona valor 6 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -68,7 +69,7 @@ void MainWindow::on_pushButtonSeis_clicked()
 
 void MainWindow::on_pushButtonQuatro_clicked()
 {
-    saida += '4';
+    saida += '4'; // Adiciona valor 4 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -76,7 +77,7 @@ void MainWindow::on_pushButtonQuatro_clicked()
 
 void MainWindow::on_pushButtonCinco_clicked()
 {
-    saida += '5';
+    saida += '5'; // Adiciona valor 5 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -84,7 +85,7 @@ void MainWindow::on_pushButtonCinco_clicked()
 
 void MainWindow::on_pushButtonSete_clicked()
 {
-    saida += '7';
+    saida += '7'; // Adiciona valor 7 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -92,7 +93,7 @@ void MainWindow::on_pushButtonSete_clicked()
 
 void MainWindow::on_pushButtonOito_clicked()
 {
-    saida += '8';
+    saida += '8'; // Adiciona valor 8 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -100,7 +101,7 @@ void MainWindow::on_pushButtonOito_clicked()
 
 void MainWindow::on_pushButtonNove_clicked()
 {
-    saida += '9';
+    saida += '9'; // Adiciona valor 9 à saida
     resultado.setValores(saida);
     ui->lineEditOperacoes->setText(saida);
 }
@@ -112,8 +113,8 @@ void MainWindow::on_pushButtonMultiplicacao_clicked()
     {
         try {
             contadorDePontos=0;
-            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-            saida += '*';
+            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE UMA OPERACAO POR VEZ.");
+            saida += '*'; // adiciona o operador * à saida
             resultado.setValores(saida);
             contador++;
             ui->lineEditOperacoes->setText(saida);
@@ -129,8 +130,8 @@ void MainWindow::on_pushButtonSubtracao_clicked()
 {
     try {
         contadorDePontos=0;
-        if(contador > 0 && saida[saida.size() - 1] != '/') throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-        saida += '-';
+        if(contador > 0 && saida[saida.size() - 1] != '/') throw QString ("O APLICATIVO NAO FAZ MAIS DE UMA OPERACAO POR VEZ.");
+        saida += '-'; // adiciona o operador - à saida
         resultado.setValores(saida);
         if(saida.size() > 1){
             contador++;
@@ -148,8 +149,8 @@ void MainWindow::on_pushButtonAdicao_clicked()
     {
         try {
             contadorDePontos=0;
-            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-            saida += '+';
+            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE UMA OPERACAO POR VEZ.");
+            saida += '+'; // adiciona o operador + à saida
             resultado.setValores(saida);
             contador++;
             ui->lineEditOperacoes->setText(saida);
@@ -165,7 +166,12 @@ void MainWindow::on_pushButtonParteDecimal_clicked()
 {
     try {
     if(contadorDePontos > 0) throw QString ("HÁ MAIS DE UM PONTO FLUTUANTE EM UM DOS VALORES.");
-    saida += '.';
+    saida += '.'; // adiciona o ponto flutuante à saida
+    if(saida.size() == 1) // caso o primeiro caractere a ser digitado seja um ponto flutuante, será emitido um alerta e zerado o que foi digitado
+    {
+        saida.clear();
+        throw QString ("Digite algum valor");
+    }
     resultado.setValores(saida);
     contadorDePontos++;
     ui->lineEditOperacoes->setText(saida);
@@ -181,8 +187,8 @@ void MainWindow::on_pushButtonPotencializacao_clicked()
     {
         try {
             contadorDePontos=0;
-            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-            saida += '^';
+            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE UMA OPERACAO POR VEZ.");
+            saida += '^'; // adiciona o operador ^ à saida
             resultado.setValores(saida);
             contador++;
             ui->lineEditOperacoes->setText(saida);
@@ -200,8 +206,8 @@ void MainWindow::on_pushButtonRadiciacao_clicked()
         {
         try {
             contadorDePontos=0;
-            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-            saida += "√";
+            if(contador > 0) throw QString ("O APLICATIVO NAO FAZ MAIS DE UMA OPERACAO POR VEZ.");
+            saida += "√"; // adiciona o operador de raiz à saida
             resultado.setValores(saida);
             ui->lineEditOperacoes->setText(saida);
             verificador = true;
@@ -216,8 +222,8 @@ void MainWindow::on_pushButtonDivisao_clicked()
 {
     try {
         contadorDePontos=0;
-        if(contador > 0 && saida[0] != '-') throw QString ("O APLICATIVO NAO FAZ MAIS DE DUAS OPERACOES POR VEZ.");
-        saida += '/';
+        if(contador > 0 && saida[0] != '-') throw QString ("O APLICATIVO NAO FAZ MAIS DE UMA OPERACAO POR VEZ.");
+        saida += '/'; // adiciona o operador / à saida
         resultado.setValores(saida);
         contador++;
         ui->lineEditOperacoes->setText(saida);
@@ -229,7 +235,7 @@ void MainWindow::on_pushButtonDivisao_clicked()
 
 void MainWindow::on_pushButtonAC_clicked()
 {
-    saida.clear();
+    saida.clear(); // apagará tudo presente na variavel saida
     verificador = false;
     resultado.setValores(saida);
     contador=0;
@@ -243,23 +249,23 @@ void MainWindow::on_pushButtonApagar_clicked()
     if(!saida.isEmpty()){
         contador=0;
         contadorDePontos=0;
-        QString rad = "√";
-        QString copia = saida;
-        int tam = saida.size();
-        saida.clear();
+        QString rad = "√"; // variavel usada para armazenar o simbolo de raiz para comparação
+        QString copia = saida; // variavel de copia para apagar o ultimo caractere digitado
+        int tam = saida.size(); // identifica o tamanho da string
+        saida.clear(); // apaga todos os dados dela
         for(int i = 0; i < tam - 1; i++){
-            saida += copia[i];
+            saida += copia[i]; // realiza o apagamento do ultimo caractere
         }
         int i = tam - 1;
         if(copia[i] == '+' || copia[i] == '-' || copia[i] == '*' || copia[i] == '/' || copia[i] == '^' || copia[i] == rad)
         {
-            contador--;
+            contador--; // caso o caractere seja digitado e apagado, não irá alterar o contador de número de operadores
         }
         else
         {
             if(copia[i] == '.')
             {
-                contadorDePontos--;
+                contadorDePontos--; // caso o caractere seja digitado e apagado, não irá alterar o contador de número de pontos flutuantes
             }
         }
         resultado.setValores(saida);
@@ -274,28 +280,29 @@ void MainWindow::on_pushButtonExecutar_clicked()
         contador = 0;
         contadorDePontos=0;
         if(saida.isEmpty()){
-            ui->lineEditResultado->setText(saida);
+            ui->lineEditResultado->setText(saida); // caso o usuario aperte igual sem digitar nenhum valor, o texto presente na variavel saida sera impresso novamente na tela
         }
         else
         {
             contador=0;
-            QString rad = "√";
+            QString rad = "√"; // variavel usada para armazenar o simbolo de raiz para comparação
             int i, k;
             for(i = 0; i < saida.size() && saida[i] != '+' && (saida[i] != '-' || i == 0) && saida[i] != '*' && saida[i] != '/' && saida[i] != rad && saida[i] != '^'; i++);
+            // for utilizado para identificar operadores
             QString primeiroValor, segundoValor;
             for(k = 0; k < i; k++){
-                primeiroValor += saida[k];
+                primeiroValor += saida[k]; // for usado para buscar o primeiro valor
             }
             for(k = i + 1; k < saida.size(); k++){
-                segundoValor += saida[k];
+                segundoValor += saida[k]; // for usado para buscar o segundo valor
             }
             resultado.setPrimeiroValor(primeiroValor.toDouble());
             resultado.setSegundoValor(segundoValor.toDouble());
-            if(i == saida.size())
+            if(i == saida.size()) // caso seja digitado apenas um valor e não seja apresentado operador, ao apertar "=", o mesmo valor será retornado como resultado
             {
                 ui->lineEditResultado->setText(saida);
             }
-            else
+            else // identifica a operacao e chama o metodo correspondente
             {
                 if(saida[i] == '+'){
                     saida = QString::number(resultado.calcularAdicao());
